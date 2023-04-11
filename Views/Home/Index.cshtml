@@ -1,0 +1,25 @@
+﻿@using Crud.Api.Models
+@model Tarefas
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Meu dia</h2>
+<p>segunda-feira, 11 de abril</p>
+<form method="post" asp-controller="Home" asp-action="CreateTask">
+    <input asp-for="Tarefa" class="form-control" type="text">
+</form>
+
+
+
+<form>
+    <label asp-for="Tarefa"></label>
+</form>
+
+    @* @if (Model.ListMasterTarefas != null) {
+    @foreach (var sla in Model.ListMasterTarefas) {
+        <div>@sla.Tarefa</div>
+    }
+} *@
+   
