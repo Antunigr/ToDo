@@ -12,25 +12,23 @@ namespace Crud.Controllers
     [ApiController]
     public class HomeController : Controller
     {
+
+        private readonly ILogger<HomeController> _logger;
         private readonly IRegisterTasks _tasksRepository;
 
-        public HomeController(IRegisterTasks tasksRepository)
+        public HomeController(IRegisterTasks tasksRepository, ILogger<HomeController> logger)
         {
             _tasksRepository = tasksRepository;
+            _logger = logger;
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> Index(Tarefas tarefas)
+        public async Task<IActionResult> Index()
         {
-            var viewModel = new Tarefas()
-            {
-                Tarefa = tarefas.Tarefa
-
-            };
-
-            return View(viewModel);
-
+            var tasks = await GetTasks();
+            _logger.LogInformation($"Número de tarefas: {tasks.Count()}");
+            return View(tasks);
         }
 
         public async Task<IEnumerable<Tarefas>> GetTasks()
