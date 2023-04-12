@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Threading.Tasks;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Crud.Api.Models;
 using Crud.Repository;
@@ -20,9 +21,16 @@ namespace Crud.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Tarefas tarefas)
         {
-            return View();
+            var viewModel = new Tarefas()
+            {
+                Tarefa = tarefas.Tarefa
+
+            };
+
+            return View(viewModel);
+
         }
 
         public async Task<IEnumerable<Tarefas>> GetTasks()

@@ -8,11 +8,8 @@ namespace Crud.Api.Models
         public int Id { get; set; }
         [Required]
         public string? Tarefa { get; set; }
-        public List<Tarefas> ListMasterTarefas { get; set; }
+
     }
-
-
-
 
 
 }
