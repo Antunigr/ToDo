@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Crud.Controllers
 {
-    [Route("Home")]
+    [Route("")]
     [ApiController]
     public class HomeController : Controller
     {
@@ -59,8 +59,8 @@ namespace Crud.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpDelete("{id}")]
-
+        [HttpPost("{id}")]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id)
         {
             var taskDelete = await _tasksRepository.Get(id);
@@ -69,7 +69,7 @@ namespace Crud.Controllers
                 return NotFound();
 
             await _tasksRepository.Delete(taskDelete.Id);
-            return NoContent();
+            return RedirectToAction("Index", "Home");
 
 
         }
